@@ -1,0 +1,6 @@
+node_modules/
+.stencil
+.DS_Store
+*.js.map
+*.zip
+.idea/
