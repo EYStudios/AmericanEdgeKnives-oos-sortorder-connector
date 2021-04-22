@@ -2,9 +2,9 @@ var Connection = require('../connection');
 
 //Initialize new API Connection:
 var api = new Connection({
-    hash: '16x7y2x5zm',
-    token: 'hae1h45w2yxa1re34hg9unsspc9vs9',
-    cid: 'anb0vkh90w7j6i23s4rw96k0zar0zu4',
+    hash: 'tzvk7f46wi',
+    token: '7swn1uxtci3bugt8qbtzrs53evm19t3',
+    cid: 'hhg010cxa4me5eoduedlsbkapaeczxt',
     host: 'https://api.bigcommerce.com' //The BigCommerce API Host
 });
 
