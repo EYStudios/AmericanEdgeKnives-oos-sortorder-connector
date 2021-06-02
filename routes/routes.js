@@ -53,7 +53,7 @@ var appRouter = function (app) {
                        
                         for (var j = 0; j < productsThree[inStockItem].length; j++)
                             // Check if in stock product has sort number 0
-                            if(productsThree[inStockItem][j].sort_order !== 2147483647) {
+                            if(productsThree[inStockItem][j].sort_order === 0) {
                                
                                 console.log("This product", productsThree[inStockItem][j].name, "sort order is changing");
                                 // Update sort order from 0 to corresponding a-z sort number
