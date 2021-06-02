@@ -196,7 +196,7 @@ var appRouter = function (app) {
                                         sortOrder1 = "36";
                                         break;
                                     default: 
-                                        sortOrder1 = "11";
+                                        sortOrder1 = "10";
                                         break;                            
                                 } 
                   
@@ -698,7 +698,7 @@ var appRouter = function (app) {
                                         sortOrder1 = "36";
                                         break;
                                     default: 
-                                        sortOrder1 = "11";
+                                        sortOrder1 = "10";
                                         break;                            
                                 } 
                   
@@ -989,8 +989,8 @@ var appRouter = function (app) {
     // Running the app again after 1 hour
     setInterval(function () {
         outOfStockOrder();
-        console.log('Rerunning after 3 minutes have passed');
-    }, 180000);
+        console.log('Rerunning after 5 minutes have passed');
+    }, 300000);
 
 
 };
