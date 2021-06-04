@@ -1,18 +1,18 @@
 var Connection = require('../connection');
 
 //Initialize new API Connection:
-var api = new Connection({
+/*var api = new Connection({
     hash: 'tzvk7f46wi',
     token: '7swn1uxtci3bugt8qbtzrs53evm19t3',
     cid: 'hhg010cxa4me5eoduedlsbkapaeczxt',
     host: 'https://api.bigcommerce.com' //The BigCommerce API Host
-});
-/*var api = new Connection({
-    hash: "16x7y2x5zm",
-    token: "ashdpy2ces5rcgousu0iekzlspzh72v",
-    cid: "hnlr60pasrmfi8ofsaz5zip8rvbgeao",
+});*/
+var api = new Connection({
+    hash: "1tyihs272l",
+    token: "nfb6ut2nn7j2k5ld6p599of6sf3g9xa",
+    cid: "2jkr8zy0a9indp4gtb6co3syur8ox24",
     host: "https://api.bigcommerce.com" //The BigCommerce API Host
-  });*/
+  });
   
 var appRouter = function (app) {
 
@@ -38,7 +38,7 @@ var appRouter = function (app) {
             message: 'Sort will happen here'
         });
         console.log("this was hit");
-        api.get('products?inventory_level:greater=0&limit=10000').then(function (response) {
+        api.get('products?inventory_level:greater=0&limit=1000').then(function (response) {
 
             let totalPages2 = response.meta.pagination.total_pages;
 
@@ -46,14 +46,14 @@ var appRouter = function (app) {
             for(var i = 1; i <= totalPages2; i++) {
 
                 // BC api v3 allows filter queries such as inventory_level:greater=0 which will return all in stock products 
-                api.get('products?inventory_level:greater=0&page='+i+'&limit=10000').then(function (productsThree) {
+                api.get('products?inventory_level:greater=0&page='+i+'&limit=1000').then(function (productsThree) {
                    // console.log("in stock products", productsTwo);
                     // Looping through in stock products
                     Object.keys(productsThree).forEach(function (inStockItem) {
                        
                         for (var j = 0; j < productsThree[inStockItem].length; j++)
                             // Check if in stock product has sort number 0
-                            if(productsThree[inStockItem][j].sort_order !== 2147483647) {
+                            if(productsThree[inStockItem][j].sort_order == 0) {
                                
                                 console.log("This product", productsThree[inStockItem][j].name, "sort order is changing");
                                 // Update sort order from 0 to corresponding a-z sort number
@@ -488,26 +488,26 @@ var appRouter = function (app) {
 
 
 
-            api.get('products?inventory_level=0&limit=10000').then(function (response) {
+            api.get('products?inventory_level=0&limit=1000').then(function (response) {
 
                 let totalPages = response.meta.pagination.total_pages;
-
+               
 
                 for(var i = 1; i <= totalPages; i++) {
                     console.log(i);
 
                     // BC api v3 allows filter queries such as inventory_level=0 which will return all out of stock products 
-                    api.get('products?inventory_level=0&page='+i+'&limit=10000').then(function (productsOne) {
+                    api.get('products?inventory_level=0&page='+i+'&limit=1000').then(function (productsOne) {
                         
                         // Looping through out of stock products
                         Object.keys(productsOne).forEach(function (outOfStockItem) {
                            
                             for(var i = 0; i < productsOne[outOfStockItem].length; i++) {  
-                                
+                               
                                 // Checking to see if we've already changed the sort order for this product or if the product is using inventory tracking.
                                 
                                     if(productsOne[outOfStockItem][i].inventory_tracking !== 'none' && productsOne[outOfStockItem][i].sort_order < newSortOrder ) {
-                                        console.log("This product", productsOne[outOfStockItem][i].name, "is now out of stock, its inventory level is now", productsOne[outOfStockItem][i].inventory_level);
+                                        console.log("This product", productsOne[outOfStockItem][i].name,"with sort order",productsOne[outOfStockItem][i].sort_order, "is now out of stock, its inventory level is now", productsOne[outOfStockItem][i].inventory_level);
                                         // If product hasn't been sorted before this means it recently went out of stock
                                         // Update out of stock product with new sort order
                                         api.put('products/' + productsOne[outOfStockItem][i].id, {
@@ -536,7 +536,7 @@ var appRouter = function (app) {
                 console.log(err)
             });
 
-            api.get('products?inventory_level:greater=0&limit=10000').then(function (response) {
+            api.get('products?inventory_level:greater=0&limit=1000').then(function (response) {
 
                 let totalPages2 = response.meta.pagination.total_pages;
 
@@ -544,7 +544,7 @@ var appRouter = function (app) {
                 for(var i = 1; i <= totalPages2; i++) {
 
                     // BC api v3 allows filter queries such as inventory_level:greater=0 which will return all in stock products 
-                    api.get('products?inventory_level:greater=0&page='+i+'&limit=10000').then(function (productsTwo) {
+                    api.get('products?inventory_level:greater=0&page='+i+'&limit=1000').then(function (productsTwo) {
                        // console.log("in stock products", productsTwo);
                         // Looping through in stock products
                         Object.keys(productsTwo).forEach(function (inStockItem) {
